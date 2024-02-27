@@ -2,16 +2,24 @@
 <html lang="en">
 <head>
     <style>
-        body {
-            background-color: #000; /* Sets the background color to black */
-            color: #fff; /* Sets the text color to white for contrast */
-            font-family: Arial, sans-serif; /* Example font */
-            text-align: center; /* Centers the text */
-            margin-top: 50px; /* Adds some space at the top */
-        }
-        #qrcode {
-            margin-top: 20px; /* Adds some space above the QR code */
-        }
+    body {
+        background-color: #000; /* Sets the background color to black */
+        color: #fff; /* Sets the text color to white for contrast */
+        font-family: Arial, sans-serif; /* Example font */
+        text-align: center; /* Centers the text */
+        margin-top: 50px; /* Adds some space at the top */
+    }
+    #qrcode {
+        margin-top: 20px; /* Adds some space above the QR code */
+        display: flex; /* Enables Flexbox for this container */
+        justify-content: center; /* Centers children horizontally in the container */
+        align-items: center; /* Centers children vertically in the container */
+        height: 200px; /* Or any other height, adjusts this to fit the QR code size */
+    }
+    img {
+        width: 150px; /* Example size for the logo */
+        margin-top: 20px; /* Adds some space above the logo */
+    }
     </style>  
     <meta charset="UTF-8">
     <title>RunX Pass Generator</title>
