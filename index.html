@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QR Code from URL Query</title>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+    <script>
+        // This function waits for the DOM to load before executing
+        document.addEventListener('DOMContentLoaded', function() {
+            // Function to extract query string value
+            function getQueryStringValue(key) {
+                return new URLSearchParams(window.location.search).get(key);
+            }
+
+            // Extract 'data' query string value
+            var queryStringValue = getQueryStringValue('data'); // 'data' is the query string parameter
+
+            // Check if the query string exists
+            if (queryStringValue) {
+                // Create QR code
+                new QRCode(document.getElementById("qrcode"), {
+                    text: queryStringValue,
+                    width: 128,
+                    height: 128,
+                    colorDark : "#000000",
+                    colorLight : "#ffffff",
+                    correctLevel : QRCode.CorrectLevel.H
+                });
+            } else {
+                // Display an error or message if no query string
+                document.getElementById("qrcode").innerHTML = "No data provided!";
+            }
+        });
+    </script>
+</head>
+<body>
+    <div id="qrcode"></div> <!-- The QR code will be inserted here -->
+</body>
+</html>
