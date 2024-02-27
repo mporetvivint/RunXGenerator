@@ -16,6 +16,12 @@
         align-items: center; /* Centers children vertically in the container */
         height: 200px; /* Or any other height, adjusts this to fit the QR code size */
     }
+    #queryStringText {
+    color: #fff; /* Sets the text color to white */
+    margin-top: 20px; /* Adds some space above the text */
+    font-size: 20px; /* Sets the size of the text */
+    /* Add any other styling properties you need */
+    }
     img {
         width: 150px; /* Example size for the logo */
         margin-top: 20px; /* Adds some space above the logo */
@@ -23,38 +29,68 @@
     </style>  
     <meta charset="UTF-8">
     <title>RunX Pass Generator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
     <script>
-        // This function waits for the DOM to load before executing
         document.addEventListener('DOMContentLoaded', function() {
-            // Function to extract query string value
             function getQueryStringValue(key) {
                 return new URLSearchParams(window.location.search).get(key);
             }
-
-            // Extract 'data' query string value
-            var queryStringValue = getQueryStringValue('data'); // 'data' is the query string parameter
-
-            // Check if the query string exists
+    
+            var queryStringValue = getQueryStringValue('code'); // 'code' is the query string parameter
+    
             if (queryStringValue) {
-                // Create QR code
+                // Create QR code with query string value
                 new QRCode(document.getElementById("qrcode"), {
                     text: queryStringValue,
                     width: 128,
                     height: 128,
-                    colorDark : "#000000",
-                    colorLight : "#ffffff",
-                    correctLevel : QRCode.CorrectLevel.H
+                    colorDark: "#000000",
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.H
                 });
+    
+                // Set text below QR code
+                document.getElementById("queryStringText").textContent = queryStringValue;
             } else {
-                // Display an error or message if no query string
-                document.getElementById("qrcode").innerHTML = "No data provided!";
+                // Handle case without query string
+                new QRCode(document.getElementById("qrcode"), {
+                    text: "No Data Provided",
+                    width: 128,
+                    height: 128,
+                    colorDark: "#000000",
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+    
+                // Set default text
+                document.getElementById("queryStringText").textContent = "No Data Provided";
             }
         });
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Your existing code here...
+    
+            // Add this new function to handle the download
+            document.getElementById('downloadPage').addEventListener('click', function() {
+                html2canvas(document.body).then(function(canvas) {
+                    // Convert the canvas to a data URL
+                    var dataURL = canvas.toDataURL('image/png');
+                    // Create a link to download the data URL as an image
+                    var link = document.createElement('a');
+                    link.href = dataURL;
+                    link.download = 'webpage-capture.png'; // Name the image file
+                    link.click(); // Trigger the download
+                });
+            });
+        });
+    </script>    
 </head>
 <body>
     <img src="https://raw.githubusercontent.com/mporetvivint/RunXGenerator/main/RunX.png" alt="Logo" style="width: 150px; margin-top: 20px;"> 
-    <div id="qrcode"></div> <!-- The QR code will be inserted here -->
+    <div id="qrcode"></div>
+    <div id="queryStringText"></div>
+    <button id="downloadPage">Download as Image</button>
 </body>
 </html>
