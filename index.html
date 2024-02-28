@@ -9,18 +9,24 @@
         text-align: center; /* Centers the text */
         margin-top: 50px; /* Adds some space at the top */
     }
-    #qrcode {
-        margin-top: 20px; /* Adds some space above the QR code */
-        display: flex; /* Enables Flexbox for this container */
-        justify-content: center; /* Centers children horizontally in the container */
-        align-items: center; /* Centers children vertically in the container */
-        height: 200px; /* Or any other height, adjusts this to fit the QR code size */
+    #contentWrapper {
+    position: relative; /* This makes the position of the child elements relative to this container */
+    display: inline-block; /* Adjusts the size of the container to the content */
+    text-align: center; /* Ensures the content is centered */
     }
-    #queryStringText {
-    color: #fff; /* Sets the text color to white */
-    margin-top: 20px; /* Adds some space above the text */
-    font-size: 20px; /* Sets the size of the text */
-    /* Add any other styling properties you need */
+    #backgroundLogo {
+    position: absolute; /* Positions the logo absolutely within the contentWrapper */
+    top: 50%; /* Centers the logo vertically */
+    left: 50%; /* Centers the logo horizontally */
+    transform: translate(-50%, -50%); /* Adjusts the centering of the logo */
+    z-index: -1; /* Places the logo behind the other content */
+    opacity: 0.5; /* Optional: makes the logo slightly transparent so the QR code and text are more readable */
+    max-width: 100%; /* Ensures the logo is not bigger than the container */
+    height: auto; /* Maintains the aspect ratio of the logo */
+    }
+    #qrcode, #queryStringText {
+    position: relative; /* Ensures these elements stay in the normal document flow but above the logo */
+    z-index: 1; /* Places the QR code and text above the background logo */
     }
     img {
         width: 150px; /* Example size for the logo */
@@ -88,8 +94,12 @@
     </script>    
 </head>
 <body>
-    <img src="https://raw.githubusercontent.com/mporetvivint/RunXGenerator/main/RunX.png" alt="Logo" style="width: 150px; margin-top: 20px;"> 
-    <div id="qrcode"></div>
+    <div id="contentWrapper">
+        <img src="https://raw.githubusercontent.com/mporetvivint/RunXGenerator/main/RunX.png" alt="RunXPass" id="backgroundLogo">
+        <div id="qrcode"></div>
+        <p id="queryStringText"></p>
+    </div>
+    
     <div id="queryStringText"></div>
     <button id="downloadPage">Download Pass</button>
 </body>
