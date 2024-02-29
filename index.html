@@ -18,21 +18,23 @@
     width: 350px; /* Adjust this value as needed */
     height: auto; /* Maintain aspect ratio */
     position: absolute; /* Positions the logo absolutely within the contentWrapper */
-    top: 50%; /* Centers the logo vertically */
+    top: 45.5%; /* Centers the logo vertically */
     left: 50%; /* Centers the logo horizontally */
     transform: translate(-50%, -50%); /* Adjusts the centering of the logo */
     z-index: -1; /* Places the logo behind the other content */
     }
     #qrcode{
     position: relative; /* Ensures these elements stay in the normal document flow but above the logo */
-    width: 300px;
+    width: 315px;
+    height: 375px; 
     scale: 70%;
-    transform: translate(-7%,22%);
+    transform: translate(0%,22%);
     z-index: 1; /* Places the QR code and text above the background logo */
     }
     #queryStringText {
     position: relative; /* Ensures these elements stay in the normal document flow but above the logo */
-    width: 300px;
+    width: 315px;
+    transform: translate(0%,-100%);
     z-index: 1; /* Places the QR code and text above the background logo */
     }
     #downloadPage{
@@ -40,7 +42,7 @@
         transform: translate(0%,300%);
     }
     img {
-        width: 350px; /* Example size for the logo */
+        width: 320px; /* Example size for the logo */
         margin-top: 20px; /* Adds some space above the logo */
     }
     </style>  
@@ -73,8 +75,8 @@
                 // Handle case without query string
                 new QRCode(document.getElementById("qrcode"), {
                     text: "No Data Provided",
-                    width: 256,
-                    height: 256,
+                    width: 300,
+                    height: 300,
                     colorDark: "#000000",
                     colorLight: "#ffffff",
                     correctLevel: QRCode.CorrectLevel.H
@@ -87,11 +89,14 @@
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Your existing code here...
-    
             // Add this new function to handle the download
             document.getElementById('downloadPage').addEventListener('click', function() {
-                html2canvas(document.body).then(function(canvas) {
+                html2canvas(document.getElementById('contentWrapper'), {
+                        useCORS: true, // This tells html2canvas to attempt to load images with CORS headers.
+                        allowTaint: false, // Keep this false to adhere to same-origin policy
+                        scrollX: 0,
+                        scrollY: -window.scrollY // Adjust canvas rendering with current scroll position
+                    }).then(function(canvas) {
                     // Convert the canvas to a data URL
                     var dataURL = canvas.toDataURL('image/png');
                     // Create a link to download the data URL as an image
