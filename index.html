@@ -10,38 +10,32 @@
         margin-top: 50px; /* Adds some space at the top */
     }
     #contentWrapper {
-        position: relative;
-        display: flex; /* Use flexbox for centering */
-        justify-content: center; /* Center children horizontally */
-        align-items: center; /* Center children vertically */
-        flex-direction: column; /* Stack children vertically */
-        width: 100%; /* Take full width to center content */
-        height: auto; /* Auto height based on content */
+    position: relative; /* This makes the position of the child elements relative to this container */
+    display: inline-block; /* Adjusts the size of the container to the content */
+    text-align: center; /* Ensures the content is centered */
     }
     #backgroundLogo {
-        width: 600px; /* Adjust this value as needed */
-        height: auto; /* Maintain aspect ratio */
-        position: absolute; /* Positions the logo absolutely within the contentWrapper */
-        top: 47.5%; /* Centers the logo vertically */
-        left: 50%; /* Centers the logo horizontally */
-        transform: translate(-50%, -50%); /* Adjusts the centering of the logo */
-        z-index: -1; /* Places the logo behind the other content */
+    width: 600px; /* Adjust this value as needed */
+    height: auto; /* Maintain aspect ratio */
+    position: absolute; /* Positions the logo absolutely within the contentWrapper */
+    top: 47.5%; /* Centers the logo vertically */
+    left: 50%; /* Centers the logo horizontally */
+    transform: translate(-50%, -50%); /* Adjusts the centering of the logo */
+    z-index: -1; /* Places the logo behind the other content */
     }
     #qrcode{
-        position: absolute;
-        width: 540px;
-        height: 690px;
-        transform: translate(19%,50%);
-        z-index: 1; /* Places the QR code and text above the background logo */
+    position: relative; /* Ensures these elements stay in the normal document flow but above the logo */
+    width: 540px;
+    height: 690px;
+    transform: translate(110px,240px);
+    z-index: 1; /* Places the QR code and text above the background logo */
     }
     #queryStringText {
-        position: relative; /* Ensures these elements stay in the normal document flow but above the logo */
-        /* width: 540px; */
-        /* transform: translate(0%,-280%); */
-        margin: 20px 0; /* Consistent spacing */
-        text-align: center; /* Ensure the text itself is centered */
-        font-size: xx-large;
-        z-index: 1; /* Places the QR code and text above the background logo */
+    position: relative; /* Ensures these elements stay in the normal document flow but above the logo */
+    width: 540px;
+    transform: translate(0%,-280%);
+    font-size: xx-large;
+    z-index: 1; /* Places the QR code and text above the background logo */
     }
     #downloadPage{
         position: relative;
