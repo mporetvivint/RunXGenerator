@@ -15,6 +15,8 @@
     text-align: center; /* Ensures the content is centered */
     }
     #backgroundLogo {
+    width: 350px; /* Adjust this value as needed */
+    height: auto; /* Maintain aspect ratio */
     position: absolute; /* Positions the logo absolutely within the contentWrapper */
     top: 50%; /* Centers the logo vertically */
     left: 50%; /* Centers the logo horizontally */
@@ -23,7 +25,7 @@
     }
     #qrcode, #queryStringText {
     position: relative; /* Ensures these elements stay in the normal document flow but above the logo */
-    width: 100px
+    width: 100px;
     z-index: 1; /* Places the QR code and text above the background logo */
     }
     img {
@@ -97,7 +99,6 @@
         <div id="qrcode"></div>
         <p id="queryStringText"></p>
     </div>
-    
     <div id="queryStringText"></div>
     <button id="downloadPage">Download Pass</button>
 </body>
