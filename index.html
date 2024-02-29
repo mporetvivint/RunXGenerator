@@ -23,12 +23,21 @@
     transform: translate(-50%, -50%); /* Adjusts the centering of the logo */
     z-index: -1; /* Places the logo behind the other content */
     }
-    #qrcode, #queryStringText {
+    #qrcode{
     position: relative; /* Ensures these elements stay in the normal document flow but above the logo */
-    width: 100px;
-    top: 50%; /* Centers the logo vertically */
-    left: 50%; /* Centers the logo horizontally */
+    width: 300px;
+    scale: 70%;
+    transform: translate(-7%,22%);
     z-index: 1; /* Places the QR code and text above the background logo */
+    }
+    #queryStringText {
+    position: relative; /* Ensures these elements stay in the normal document flow but above the logo */
+    width: 300px;
+    z-index: 1; /* Places the QR code and text above the background logo */
+    }
+    #downloadPage{
+        position: relative;
+        transform: translate(0%,300%);
     }
     img {
         width: 350px; /* Example size for the logo */
@@ -64,8 +73,8 @@
                 // Handle case without query string
                 new QRCode(document.getElementById("qrcode"), {
                     text: "No Data Provided",
-                    width: 128,
-                    height: 128,
+                    width: 256,
+                    height: 256,
                     colorDark: "#000000",
                     colorLight: "#ffffff",
                     correctLevel: QRCode.CorrectLevel.H
@@ -101,6 +110,7 @@
         <div id="qrcode"></div>
         <p id="queryStringText"></p>
     </div>
+    
     <div id="queryStringText"></div>
     <button id="downloadPage">Download Pass</button>
 </body>
