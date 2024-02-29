@@ -15,31 +15,33 @@
     text-align: center; /* Ensures the content is centered */
     }
     #backgroundLogo {
-    width: 350px; /* Adjust this value as needed */
+    width: 600px; /* Adjust this value as needed */
     height: auto; /* Maintain aspect ratio */
     position: absolute; /* Positions the logo absolutely within the contentWrapper */
-    top: 45.5%; /* Centers the logo vertically */
+    top: 47.5%; /* Centers the logo vertically */
     left: 50%; /* Centers the logo horizontally */
     transform: translate(-50%, -50%); /* Adjusts the centering of the logo */
     z-index: -1; /* Places the logo behind the other content */
     }
     #qrcode{
     position: relative; /* Ensures these elements stay in the normal document flow but above the logo */
-    width: 315px;
-    height: 375px; 
-    scale: 70%;
-    transform: translate(0%,22%);
+    width: 540px;
+    height: 690px; 
+    transform: translate(19%,37%);
     z-index: 1; /* Places the QR code and text above the background logo */
     }
     #queryStringText {
     position: relative; /* Ensures these elements stay in the normal document flow but above the logo */
-    width: 315px;
-    transform: translate(0%,-100%);
+    width: 540px;
+    transform: translate(0%,-280%);
+    font-size: xx-large;
     z-index: 1; /* Places the QR code and text above the background logo */
     }
     #downloadPage{
         position: relative;
-        transform: translate(0%,300%);
+        transform: translate(0%,-220%);
+        font-size: xx-large;
+        z-index: 2;
     }
     img {
         width: 320px; /* Example size for the logo */
@@ -110,7 +112,7 @@
     </script>    
 </head>
 <body>
-    <div id="contentWrapper">
+        <div id="contentWrapper">
         <img src="https://raw.githubusercontent.com/mporetvivint/RunXGenerator/main/RunX.png" alt="RunXPass" id="backgroundLogo">
         <div id="qrcode"></div>
         <p id="queryStringText"></p>
