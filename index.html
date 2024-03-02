@@ -15,10 +15,10 @@
     text-align: center; /* Ensures the content is centered */
     }
     #backgroundLogo {
-    width: 600px; /* Adjust this value as needed */
+    width: 750px; /* Adjust this value as needed */
     height: auto; /* Maintain aspect ratio */
     position: absolute; /* Positions the logo absolutely within the contentWrapper */
-    top: 47.5%; /* Centers the logo vertically */
+    top: 53%; /* Centers the logo vertically */
     left: 50%; /* Centers the logo horizontally */
     transform: translate(-50%, -50%); /* Adjusts the centering of the logo */
     z-index: -1; /* Places the logo behind the other content */
@@ -28,18 +28,19 @@
     width: 540px;
     height: 690px;
     transform: translate(110px,240px);
+    scale: 150%;
     z-index: 1; /* Places the QR code and text above the background logo */
     }
     #queryStringText {
     position: relative; /* Ensures these elements stay in the normal document flow but above the logo */
     width: 540px;
-    transform: translate(0%,-280%);
+    transform: translate(0%,-100%);
     font-size: xx-large;
     z-index: 1; /* Places the QR code and text above the background logo */
     }
     #downloadPage{
         position: relative;
-        transform: translate(0%,-40%);
+        transform: translate(0%,310%);
         font-size: xx-large;
         color: #fff;
         z-index: 2;
