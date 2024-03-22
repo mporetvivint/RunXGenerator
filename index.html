@@ -10,37 +10,37 @@
         margin-top: 50px; /* Adds some space at the top */
     }
     #contentWrapper {
-    position: relative; /* This makes the position of the child elements relative to this container */
-    display: inline-block; /* Adjusts the size of the container to the content */
-    text-align: center; /* Ensures the content is centered */
+        position: relative; /* This makes the position of the child elements relative to this container */
+        display: inline-block; /* Adjusts the size of the container to the content */
+        text-align: center; /* Ensures the content is centered */
     }
     #backgroundLogo {
-    width: 750px; /* Adjust this value as needed */
-    height: auto; /* Maintain aspect ratio */
-    position: absolute; /* Positions the logo absolutely within the contentWrapper */
-    top: 53%; /* Centers the logo vertically */
-    left: 50%; /* Centers the logo horizontally */
-    transform: translate(-50%, -50%); /* Adjusts the centering of the logo */
-    z-index: -1; /* Places the logo behind the other content */
+        width: 750px; /* Adjust this value as needed */
+        height: auto; /* Maintain aspect ratio */
+        position: absolute; /* Positions the logo absolutely within the contentWrapper */
+        top: 60%; /* Centers the logo vertically */
+        left: 50%; /* Centers the logo horizontally */
+        transform: translate(-50%, -50%); /* Adjusts the centering of the logo */
+        z-index: -1; /* Places the logo behind the other content */
     }
     #qrcode{
-    position: relative; /* Ensures these elements stay in the normal document flow but above the logo */
-    width: 540px;
-    height: 690px;
-    transform: translate(110px,280px);
-    scale: 200%;
-    z-index: 1; /* Places the QR code and text above the background logo */
+        position: relative; /* Ensures these elements stay in the normal document flow but above the logo */
+        width: 540px;
+        height: 690px;
+        transform: translate(110px,310px);
+        scale: 200%;
+        z-index: 1; /* Places the QR code and text above the background logo */
     }
     #queryStringText {
-    position: relative; /* Ensures these elements stay in the normal document flow but above the logo */
-    width: 540px;
-    transform: translate(0%,380%);
-    font-size: xx-large;
-    z-index: 1; /* Places the QR code and text above the background logo */
+        position: relative; /* Ensures these elements stay in the normal document flow but above the logo */
+        width: 540px;
+        transform: translate(0%,520%);
+        font-size: xx-large;
+        z-index: 1; /* Places the QR code and text above the background logo */
     }
     #downloadPage{
         position: relative;
-        transform: translate(0%,310%);
+        transform: translate(0%,510%);
         font-size: xx-large;
         color: #fff;
         z-index: 2;
@@ -49,6 +49,35 @@
         width: 320px; /* Example size for the logo */
         margin-top: 20px; /* Adds some space above the logo */
     }
+    /* Style for the form */
+    form {
+        margin-top: -500px; /* Increase space above the form if needed */
+        position: relative;
+        z-index: 10;
+        width: 100%; /* Make form take the full width of its container */
+        max-width: 600px; /* Set a max-width for better appearance */
+        margin-left: auto; /* Centering the form */
+        margin-right: auto;
+    }
+    input, button {
+        display: block; /* Make form elements stack vertically */
+        width: 100%; /* Full width */
+        padding: 20px; /* Increase padding for larger touch area */
+        margin: 10px auto; /* Add some space between form elements and center them */
+        font-size: 40px; /* Increase font size for better readability */
+        box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    }
+    button {
+        cursor: pointer; /* Change cursor to pointer when hovering over the button */
+        background-color: #4CAF50; /* Add background color to the button */
+        color: white; /* Change text color to white for better visibility */
+        border: none; /* Remove border */
+    }
+    /* Style to improve the appearance of input fields */
+    input[type="text"], input[type="email"] {
+        border: 2px solid #ccc; /* Add a border to the input fields */
+        border-radius: 4px; /* Round the corners of the input fields */
+    }
     </style>  
     <meta charset="UTF-8">
     <title>RunX Pass Generator</title>
@@ -56,71 +85,63 @@
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            function getQueryStringValue(key) {
-                return new URLSearchParams(window.location.search).get(key);
-            }
+            // Form submission handler
+            document.getElementById('formSubmit').addEventListener('click', function(e) {
+                e.preventDefault(); // Prevent the default form submission
     
-            var queryStringValue = getQueryStringValue('code'); // 'code' is the query string parameter
+                var userForm = document.getElementById('userForm');
     
-            if (queryStringValue) {
-                // Create QR code with query string value
-                new QRCode(document.getElementById("qrcode"), {
-                    text: queryStringValue,
-                    width: 300,
-                    height: 300,
-                    colorDark: "#000000",
-                    colorLight: "#ffffff",
-                    correctLevel: QRCode.CorrectLevel.H
-                });
+                // Check if the form is valid
+                if (userForm.checkValidity()) {
+                    // Get user input values
+                    var userName = document.getElementById('userName').value;
+                    var userEmail = document.getElementById('userEmail').value;
     
-                // Set text below QR code
-                document.getElementById("queryStringText").textContent = queryStringValue;
-            } else {
-                // Handle case without query string
-                new QRCode(document.getElementById("qrcode"), {
-                    text: "No Data Provided",
-                    width: 300,
-                    height: 300,
-                    colorDark: "#000000",
-                    colorLight: "#ffffff",
-                    correctLevel: QRCode.CorrectLevel.H
-                });
+                    // Create JSON data from the user input
+                    var jsonData = JSON.stringify({
+                        name: userName,
+                        email: userEmail
+                    });
     
-                // Set default text
-                document.getElementById("queryStringText").textContent = "No Data Provided";
-            }
-        });
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add this new function to handle the download
-            document.getElementById('downloadPage').addEventListener('click', function() {
-                html2canvas(document.getElementById('contentWrapper'), {
-                        useCORS: true, // This tells html2canvas to attempt to load images with CORS headers.
-                        allowTaint: false, // Keep this false to adhere to same-origin policy
-                        scrollX: 0,
-                        scrollY: -window.scrollY // Adjust canvas rendering with current scroll position
-                    }).then(function(canvas) {
-                    // Convert the canvas to a data URL
-                    var dataURL = canvas.toDataURL('image/png');
-                    // Create a link to download the data URL as an image
-                    var link = document.createElement('a');
-                    link.href = dataURL;
-                    link.download = 'RunXPass.png'; // Name the image file
-                    link.click(); // Trigger the download
-                });
+                    // Generate QR code with the JSON data
+                    new QRCode(document.getElementById("qrcode"), {
+                        text: jsonData,
+                        width: 300,
+                        height: 300,
+                        colorDark: "#000000",
+                        colorLight: "#ffffff",
+                        correctLevel: QRCode.CorrectLevel.H
+                    });
+    
+                    // Display only the user's email below QR code
+                    document.getElementById("queryStringText").textContent = userEmail;
+                    document.getElementById("downloadPage").textContent = "Take a Screenshot and Save This Pass"
+    
+                    // Hide the form
+                    document.getElementById("userForm").style.display = "none";
+                } else {
+                    // If form is not valid, show validation messages
+                    userForm.reportValidity();
+                }
             });
         });
-    </script>    
+    </script>
+        
 </head>
 <body>
-        <div id="contentWrapper">
+    <div id="contentWrapper">
         <img src="https://raw.githubusercontent.com/mporetvivint/RunXGenerator/main/RunX.png" alt="RunXPass" id="backgroundLogo">
         <div id="qrcode"></div>
         <p id="queryStringText"></p>
     </div>
     
-    <div id="queryStringText"></div>
-    <div id="downloadPage">Take a Screenshot and Save This Pass</div>
+    <!-- Form for user input -->
+    <form id="userForm">
+        <input type="text" id="userName" placeholder="Enter your name" required pattern="[a-zA-Z0-9 ]+">
+        <input type="email" id="userEmail" placeholder="Enter your email address" required>
+        <button type="submit" id="formSubmit">Generate QR Code</button>
+    </form>
+    
+    <div id="downloadPage"></div>
 </body>
 </html>
