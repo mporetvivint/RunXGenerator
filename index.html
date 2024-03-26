@@ -69,7 +69,7 @@
     }
     button {
         cursor: pointer; /* Change cursor to pointer when hovering over the button */
-        background-color: #EE8C66; /* Add background color to the button */
+        background-color: #4CAF50; /* Add background color to the button */
         color: white; /* Change text color to white for better visibility */
         border: none; /* Remove border */
     }
@@ -110,7 +110,7 @@
                         height: 300,
                         colorDark: "#000000",
                         colorLight: "#ffffff",
-                        correctLevel: QRCode.CorrectLevel.H
+                        correctLevel: QRCode.CorrectLevel.L
                     });
     
                     // Display only the user's email below QR code
@@ -139,7 +139,7 @@
     <form id="userForm">
         <input type="text" id="userName" placeholder="Enter your name" required pattern="[a-zA-Z0-9 ]+">
         <input type="email" id="userEmail" placeholder="Enter your email address" required>
-        <button type="submit" id="formSubmit">Generate RunX Pass</button>
+        <button type="submit" id="formSubmit">Generate QR Code</button>
     </form>
     
     <div id="downloadPage"></div>
